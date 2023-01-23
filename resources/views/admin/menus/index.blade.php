@@ -33,9 +33,7 @@
                                 class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                 Actions
                             </th>
-                            <th scope="col" class="relative py-3 px-6">
-                                <span class="sr-only">Edit</span>
-                            </th>
+
                         </tr>
                     </thead>
                     <tbody>

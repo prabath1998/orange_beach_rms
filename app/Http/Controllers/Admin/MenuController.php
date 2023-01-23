@@ -96,7 +96,7 @@ class MenuController extends Controller
         $image = $menu->image;
         if ($request->hasFile('image')) {
             Storage::delete($menu->image);
-            $image = $request->file('image')->store('public/menus');
+            $image = $request->file('image')->store('menus','public');
         }
 
         $menu->update([
