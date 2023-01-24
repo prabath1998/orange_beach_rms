@@ -49,10 +49,55 @@
                 <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                     href="{{ route('reservations.step.one') }}">Make Reservation</a>
 
+                @auth
+                    {{-- <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                        href="{{ route('logout') }}">{{ Auth::user()->name }}</a> --}}
+                        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                            <button @click="open = !open"
+                                class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark:bg-transparent dark:focus:text-white dark:hover:text-white dark:focus:bg-gray-600 dark:hover:bg-gray-600 md:block hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                                <span>{{ Auth::user()->name }}</span>
+                                <svg fill="currentColor" viewBox="0 0 20 20" :class="{ 'rotate-180': open, 'rotate-0': !open }"
+                                    class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                                x-transition:enter-start="transform opacity-0 scale-95"
+                                x-transition:enter-end="transform opacity-100 scale-100"
+                                x-transition:leave="transition ease-in duration-75"
+                                x-transition:leave-start="transform opacity-100 scale-100"
+                                x-transition:leave-end="transform opacity-0 scale-95"
+                                class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg">
+                                <div class="px-2 py-2 bg-white rounded-md shadow dark:bg-gray-700">
+
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+
+                                        <x-dropdown-link :href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                                    this.closest('form').submit();"
+                                            class="block px-4 w-full py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                                            {{ __('Sign Out') }}
+                                        </x-dropdown-link>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                @else
+                    <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                        href="{{ route('login') }}">Login</a>
+                    <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                        href="{{ route('register') }}">Register</a>
+                @endauth
+
+
+
             </div>
         </nav>
     </div>
-    <div class="font-sans text-gray-900 antialiased min-h-screen">
+    <div class="font-sans text-gray-900 antialiased min-h-screen mx-auto">
         {{ $slot }}
     </div>
     <footer class="bg-gray-800 border-t border-gray-200">
@@ -83,7 +128,8 @@
                 <a class="ml-3">
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" class="w-6 h-6 text-pink-400" viewBox="0 0 24 24">
-                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5">
+                        </rect>
                         <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                     </svg>
                 </a>
